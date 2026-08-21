@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+CA Tax Audit & Presumptive Tax Checker | CA Himanshu Gugnani
+</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f3f6fa;
+    color:#222;
+}
+
+.container{
+    max-width:950px;
+    margin:25px auto;
+    padding:15px;
+}
+
+/* HEADER */
+
+.header{
+    background:linear-gradient(135deg,#102f52,#1769aa);
+    color:white;
+    padding:30px 25px;
+    border-radius:16px;
+    margin-bottom:20px;
+    box-shadow:0 5px 18px rgba(0,0,0,.12);
+}
+
+.header h1{
+    margin:0 0 8px;
+    font-size:29px;
+}
+
+.header .subtitle{
+    font-size:16px;
+    margin-bottom:15px;
+    opacity:.95;
+}
+
+.developer{
+    display:inline-block;
+    background:rgba(255,255,255,.15);
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+    padding:22px;
+    border-radius:15px;
+    margin-bottom:18px;
+    box-shadow:0 3px 14px rgba(0,0,0,.07);
+}
+
+h2{
+    color:#17365d;
+    margin-top:0;
+}
+
+h3{
+    color:#17365d;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-top:14px;
+    margin-bottom:6px;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccd5df;
+    border-radius:8px;
+    font-size:16px;
+    background:white;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#1769aa;
+    box-shadow:0 0 0 2px rgba(23,105,170,.12);
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+/* BUTTON */
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:9px;
+    background:#087f4b;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:8px;
+}
+
+button:hover{
+    background:#05643a;
+}
+
+.reset{
+    background:#6c757d;
+}
+
+.reset:hover{
+    background:#545b62;
+}
+
+/* RESULT */
+
+.result{
+    display:none;
+}
+
+.result-box{
+    padding:20px;
+    border-radius:14px;
+    margin-bottom:15px;
+}
+
+.green{
+    background:#e8f8ef;
+    border:2px solid #20a35a;
+}
+
+.red{
+    background:#fff0f0;
+    border:2px solid #d64545;
+}
+
+.orange{
+    background:#fff7e6;
+    border:2px solid #e2a000;
+}
+
+.blue{
+    background:#eef5ff;
+    border:2px solid #377dcc;
+}
+
+.status{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.item{
+    background:white;
+    padding:14px;
+    margin:9px 0;
+    border-radius:8px;
+    border:1px solid #e4e8ed;
+}
+
+.calculation{
+    font-family:monospace;
+    background:#f7f8fa;
+    padding:12px;
+    border-radius:7px;
+    margin-top:7px;
+    line-height:1.7;
+    overflow-x:auto;
+}
+
+.success{
+    color:#087f4b;
+    font-weight:bold;
+}
+
+.danger{
+    color:#b42323;
+    font-weight:bold;
+}
+
+.warning{
+    background:#fff3cd;
+    border-left:5px solid #ffbd00;
+    padding:14px;
+    margin-top:15px;
+    border-radius:5px;
+}
+
+.info{
+    background:#eef5ff;
+    border-left:5px solid #377dcc;
+    padding:14px;
+    margin-top:15px;
+    border-radius:5px;
+}
+
+.hidden{
+    display:none;
+}
+
+.note{
+    font-size:13px;
+    color:#666;
+    margin-top:8px;
+}
+
+.big-result{
+    font-size:22px;
+    font-weight:bold;
+    color:#17365d;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    color:#666;
+    font-size:13px;
+    padding:20px 10px 30px;
+}
+
+.footer strong{
+    color:#17365d;
+}
+
+.badge{
+    display:inline-block;
+    margin:4px;
+    padding:6px 10px;
+    background:#eef5ff;
+    color:#17365d;
+    border-radius:15px;
+    font-size:12px;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .row{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        padding:10px;
+        margin:10px auto;
+    }
+
+    .header{
+        padding:23px 18px;
+    }
+
+    .header h1{
+        font-size:23px;
+    }
+
+    .header .subtitle{
+        font-size:14px;
+    }
+
+    .status{
+        font-size:20px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<div class="header">
+
+    <h1>
+        CA Tax Audit & Presumptive Tax Checker
+    </h1>
+
+    <div class="subtitle">
+        Tax Audit • 44AD • 44ADA • 44AB Applicability
+    </div>
+
+    <div class="developer">
+        Developed by CA Himanshu Gugnani
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     ASSESSEE DETAILS
+========================================= -->
+
+<div class="card">
+
+    <h2>1. Assessee Details</h2>
+
+    <label>Assessee Category</label>
+
+    <select id="category">
+
+        <option value="">-- Select --</option>
+
+        <option value="individual">
+            Individual
+        </option>
+
+        <option value="huf">
+            HUF
+        </option>
+
+        <option value="firm">
+            Partnership Firm
+        </option>
+
+        <option value="llp">
+            LLP
+        </option>
+
+        <option value="company">
+            Company
+        </option>
+
+        <option value="other">
+            Other
+        </option>
+
+    </select>
+
+
+    <label>Residential Status</label>
+
+    <select id="resident">
+
+        <option value="resident">
+            Resident
+        </option>
+
+        <option value="nonresident">
+            Non-Resident
+        </option>
+
+    </select>
+
+
+    <label>Nature of Activity</label>
+
+    <select id="activity" onchange="activityChanged()">
+
+        <option value="">
+            -- Select --
+        </option>
+
+        <option value="business">
+            Business
+        </option>
+
+        <option value="profession">
+            Profession
+        </option>
+
+    </select>
+
+</div>
+
+
+
+<!-- =========================================
+     BUSINESS
+========================================= -->
+
+<div class="card hidden" id="businessSection">
+
+    <h2>2. Business Details</h2>
+
+    <label>Nature of Business</label>
+
+    <select id="businessNature">
+
+        <option value="">
+            -- Select Business Nature --
+        </option>
+
+        <option value="trading">
+            Trading Business
+        </option>
+
+        <option value="manufacturing">
+            Manufacturing
+        </option>
+
+        <option value="retail">
+            Retail Business
+        </option>
+
+        <option value="wholesale">
+            Wholesale Business
+        </option>
+
+        <option value="construction">
+            Construction / Contractor
+        </option>
+
+        <option value="service">
+            Service Business
+        </option>
+
+        <option value="ecommerce">
+            E-Commerce Business
+        </option>
+
+        <option value="restaurant">
+            Restaurant / Food Business
+        </option>
+
+        <option value="otherEligible">
+            Other Eligible Business
+        </option>
+
+        <option value="agency">
+            Agency Business
+        </option>
+
+        <option value="commission">
+            Commission / Brokerage
+        </option>
+
+        <option value="goodsCarriage">
+            Goods Carriage / Transport - 44AE
+        </option>
+
+        <option value="profession">
+            Specified Profession
+        </option>
+
+        <option value="speculative">
+            Speculative Business
+        </option>
+
+    </select>
+
+
+    <div class="note">
+        Business nature ke basis par tool automatically
+        44AD eligibility determine karega.
+    </div>
+
+
+    <label>
+        Turnover / Gross Receipts (₹)
+    </label>
+
+    <input
+        type="number"
+        id="turnover"
+        placeholder="Example: 10000000"
+        min="0"
+    >
+
+
+    <div class="row">
+
+        <div>
+
+            <label>
+                Cash Receipts (₹)
+            </label>
+
+            <input
+                type="number"
+                id="cashReceipts"
+                placeholder="Example: 300000"
+                min="0"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Cash Payments (₹)
+            </label>
+
+            <input
+                type="number"
+                id="cashPayments"
+                placeholder="Example: 500000"
+                min="0"
+            >
+
+        </div>
+
+    </div>
+
+
+    <label>
+        Profit Declared (₹)
+    </label>
+
+    <input
+        type="number"
+        id="profitDeclared"
+        placeholder="Example: 700000"
+        min="0"
+    >
+
+
+    <div class="note">
+        Total Receipt ke liye isi Turnover / Gross Receipts
+        field ko use kiya jayega.
+    </div>
+
+
+    <h3>44AD History</h3>
+
+
+    <label>
+        Was 44AD opted in an earlier year?
+    </label>
+
+    <select id="previous44ad">
+
+        <option value="no">
+            No
+        </option>
+
+        <option value="yes">
+            Yes
+        </option>
+
+    </select>
+
+
+    <label>
+        Was 44AD discontinued / lower-income declaration issue?
+    </label>
+
+    <select id="optout44ad">
+
+        <option value="no">
+            No
+        </option>
+
+        <option value="yes">
+            Yes
+        </option>
+
+    </select>
+
+
+    <label>
+        Any deduction under specified Chapter VI-A /
+        Sections 10A, 10AA, 10B, 10BA claimed?
+    </label>
+
+    <select id="deductionIssue">
+
+        <option value="no">
+            No
+        </option>
+
+        <option value="yes">
+            Yes
+        </option>
+
+    </select>
+
+</div>
+
+
+
+<!-- =========================================
+     PROFESSION
+========================================= -->
+
+<div class="card hidden" id="professionSection">
+
+    <h2>2. Professional Details</h2>
+
+
+    <label>
+        Nature of Profession
+    </label>
+
+    <select id="professionNature">
+
+        <option value="">
+            -- Select Profession --
+        </option>
+
+        <option value="legal">
+            Legal
+        </option>
+
+        <option value="medical">
+            Medical
+        </option>
+
+        <option value="engineering">
+            Engineering
+        </option>
+
+        <option value="architecture">
+            Architecture
+        </option>
+
+        <option value="accountancy">
+            Accountancy
+        </option>
+
+        <option value="technical">
+            Technical Consultancy
+        </option>
+
+        <option value="interior">
+            Interior Decoration
+        </option>
+
+        <option value="otherSpecified">
+            Other Specified Profession
+        </option>
+
+        <option value="other">
+            Other / Non-Specified Profession
+        </option>
+
+    </select>
+
+
+    <label>
+        Gross Professional Receipts (₹)
+    </label>
+
+    <input
+        type="number"
+        id="professionalReceipts"
+        placeholder="Example: 6000000"
+        min="0"
+    >
+
+
+    <label>
+        Cash Receipts (₹)
+    </label>
+
+    <input
+        type="number"
+        id="professionalCashReceipts"
+        placeholder="Example: 200000"
+        min="0"
+    >
+
+
+    <label>
+        Profit / Income Declared (₹)
+    </label>
+
+    <input
+        type="number"
+        id="professionalProfit"
+        placeholder="Example: 3000000"
+        min="0"
+    >
+
+
+    <label>
+        44ADA Being Opted?
+    </label>
+
+    <select id="opt44ada">
+
+        <option value="yes">
+            Yes
+        </option>
+
+        <option value="no">
+            No
+        </option>
+
+    </select>
+
+</div>
+
+
+
+<!-- =========================================
+     OTHER COMPLIANCE
+========================================= -->
+
+<div class="card">
+
+    <h2>3. Other Compliance</h2>
+
+
+    <label>
+        Accounts audited under any other law?
+    </label>
+
+    <select id="otherAudit">
+
+        <option value="no">
+            No
+        </option>
+
+        <option value="yes">
+            Yes
+        </option>
+
+    </select>
+
+
+    <label>
+        Transfer Pricing u/s 92E applicable?
+    </label>
+
+    <select id="tp">
+
+        <option value="no">
+            No
+        </option>
+
+        <option value="yes">
+            Yes
+        </option>
+
+    </select>
+
+</div>
+
+
+
+<!-- =========================================
+     BUTTON
+========================================= -->
+
+<div class="card">
+
+    <button onclick="calculate()">
+        CHECK APPLICABILITY
+    </button>
+
+    <button
+        class="reset"
+        onclick="resetAll()"
+    >
+        RESET
+    </button>
+
+</div>
+
+
+
+<!-- =========================================
+     RESULTS
+========================================= -->
+
+<div id="result" class="result">
+
+
+    <!-- CASH TEST -->
+
+    <div class="result-box blue">
+
+        <h2>
+            Cash Transaction Test
+        </h2>
+
+        <div id="cashDetails"></div>
+
+    </div>
+
+
+
+    <!-- 44AD -->
+
+    <div
+        id="adBox"
+        class="result-box"
+    >
+
+        <div
+            id="adStatus"
+            class="status"
+        ></div>
+
+        <div id="adDetails"></div>
+
+    </div>
+
+
+
+    <!-- AUDIT -->
+
+    <div
+        id="auditBox"
+        class="result-box"
+    >
+
+        <div
+            id="auditStatus"
+            class="status"
+        ></div>
+
+        <div id="auditDetails"></div>
+
+    </div>
+
+
+
+    <!-- 44ADA -->
+
+    <div
+        id="adaBox"
+        class="result-box"
+    >
+
+        <div
+            id="adaStatus"
+            class="status"
+        ></div>
+
+        <div id="adaDetails"></div>
+
+    </div>
+
+
+
+    <!-- REVIEW -->
+
+    <div class="result-box orange">
+
+        <h2>
+            CA Review Points
+        </h2>
+
+        <div id="reviewPoints"></div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<div class="footer">
+
+    <div>
+        <span class="badge">
+            TAX AUDIT
+        </span>
+
+        <span class="badge">
+            44AB
+        </span>
+
+        <span class="badge">
+            44AD
+        </span>
+
+        <span class="badge">
+            44ADA
+        </span>
+    </div>
+
+    <br>
+
+    <strong>
+        CA Tax Audit & Presumptive Tax Checker
+    </strong>
+
+    <br><br>
+
+    Developed by
+    <strong>
+        CA Himanshu Gugnani
+    </strong>
+
+    <br><br>
+
+    © 2026 CA Himanshu Gugnani
+
+    <br>
+
+    <small>
+        Professional Tax Decision Support Tool
+    </small>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =========================================
+   SHOW / HIDE
+========================================= */
+
+function activityChanged(){
+
+    let activity =
+        document.getElementById("activity").value;
+
+    document
+        .getElementById("businessSection")
+        .classList.add("hidden");
+
+    document
+        .getElementById("professionSection")
+        .classList.add("hidden");
+
+
+    if(activity === "business"){
+
+        document
+            .getElementById("businessSection")
+            .classList.remove("hidden");
+
+    }
+
+
+    if(activity === "profession"){
+
+        document
+            .getElementById("professionSection")
+            .classList.remove("hidden");
+
+    }
+
+}
+
+
+/* =========================================
+   FORMAT MONEY
+========================================= */
+
+function money(n){
+
+    return new Intl.NumberFormat(
+        "en-IN",
+        {
+            style:"currency",
+            currency:"INR",
+            maximumFractionDigits:0
+        }
+    ).format(n);
+
+}
+
+
+function pct(cash,total){
+
+    if(total <= 0){
+        return 0;
+    }
+
+    return (cash / total) * 100;
+
+}
+
+
+function pass(condition){
+
+    return condition
+
+        ? '<span class="success">PASS ✓</span>'
+
+        : '<span class="danger">FAIL ✗</span>';
+
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+function calculate(){
+
+    let category =
+        document.getElementById("category").value;
+
+    let activity =
+        document.getElementById("activity").value;
+
+
+    if(!category){
+
+        alert(
+            "Please select Assessee Category."
+        );
+
+        return;
+
+    }
+
+
+    if(!activity){
+
+        alert(
+            "Please select Nature of Activity."
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("result")
+        .style.display="block";
+
+
+    if(activity === "business"){
+
+        calculateBusiness();
+
+    }
+    else{
+
+        calculateProfession();
+
+    }
+
+}
+
+
+/* =========================================
+   BUSINESS
+========================================= */
+
+function calculateBusiness(){
+
+    let category =
+        document.getElementById("category").value;
+
+    let resident =
+        document.getElementById("resident").value;
+
+    let nature =
+        document.getElementById("businessNature").value;
+
+    let turnover =
+        Number(
+            document.getElementById("turnover").value
+        ) || 0;
+
+    let cashReceipts =
+        Number(
+            document.getElementById("cashReceipts").value
+        ) || 0;
+
+    let cashPayments =
+        Number(
+            document.getElementById("cashPayments").value
+        ) || 0;
+
+    let profitDeclared =
+        Number(
+            document.getElementById("profitDeclared").value
+        ) || 0;
+
+
+    if(!nature){
+
+        alert(
+            "Please select Nature of Business."
+        );
+
+        return;
+
+    }
+
+
+    if(turnover <= 0){
+
+        alert(
+            "Please enter Turnover / Gross Receipts."
+        );
+
+        return;
+
+    }
+
+
+    if(cashReceipts > turnover){
+
+        alert(
+            "Cash Receipts cannot exceed Turnover."
+        );
+
+        return;
+
+    }
+
+
+    if(cashPayments > turnover){
+
+        alert(
+            "Cash Payments cannot exceed Turnover."
+        );
+
+        return;
+
+    }
+
+
+    /* CASH TEST */
+
+    let cashReceiptPct =
+        pct(
+            cashReceipts,
+            turnover
+        );
+
+    let cashPaymentPct =
+        pct(
+            cashPayments,
+            turnover
+        );
+
+
+    let cashReceiptPass =
+        cashReceiptPct <= 5;
+
+    let cashPaymentPass =
+        cashPaymentPct <= 5;
+
+
+    document
+        .getElementById("cashDetails")
+        .innerHTML = `
+
+        <div class="item">
+
+            <b>Cash Receipts Test</b>
+
+            <div class="calculation">
+
+                ${money(cashReceipts)}
+                ÷
+                ${money(turnover)}
+                × 100
+
+                =
+
+                <b>
+                    ${cashReceiptPct.toFixed(2)}%
+                </b>
+
+                &nbsp;
+
+                ${pass(cashReceiptPass)}
+
+            </div>
+
+        </div>
+
+
+        <div class="item">
+
+            <b>Cash Payments Test</b>
+
+            <div class="calculation">
+
+                ${money(cashPayments)}
+                ÷
+                ${money(turnover)}
+                × 100
+
+                =
+
+                <b>
+                    ${cashPaymentPct.toFixed(2)}%
+                </b>
+
+                &nbsp;
+
+                ${pass(cashPaymentPass)}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    /* 44AD ELIGIBILITY */
+
+    let eligible = true;
+
+    let reasons = [];
+
+
+    if(
+        category !== "individual" &&
+        category !== "huf" &&
+        category !== "firm"
+    ){
+
+        eligible = false;
+
+        reasons.push(
+            "Selected assessee category is not eligible for Section 44AD."
+        );
+
+    }
+
+
+    if(resident !== "resident"){
+
+        eligible = false;
+
+        reasons.push(
+            "44AD requires a resident eligible assessee."
+        );
+
+    }
+
+
+    if(
+        nature === "agency"
+    ){
+
+        eligible = false;
+
+        reasons.push(
+            "Agency business is excluded from Section 44AD."
+        );
+
+    }
+
+
+    if(
+        nature === "commission"
+    ){
+
+        eligible = false;
+
+        reasons.push(
+            "Commission / brokerage business is excluded from Section 44AD."
+        );
+
+    }
+
+
+    if(
+        nature === "goodsCarriage"
+    ){
+
+        eligible = false;
+
+        reasons.push(
+            "Goods carriage business is covered separately by Section 44AE."
+        );
+
+    }
+
+
+    if(
+        nature === "profession"
+    ){
+
+        eligible = false;
+
+        reasons.push(
+            "Specified profession is considered under Section 44ADA."
+        );
+
+    }
+
+
+    if(
+        nature === "speculative"
+    ){
+
+        eligible = false;
+
+        reasons.push(
+            "Speculative business requires separate tax treatment."
+        );
+
+    }
+
+
+    let deductionIssue =
+        document.getElementById("deductionIssue").value;
+
+
+    if(deductionIssue === "yes"){
+
+        eligible = false;
+
+        reasons.push(
+            "Specified deduction selected. Eligibility requires specific review."
+        );
+
+    }
+
+
+    /* TURNOVER LIMIT */
+
+    let limit44AD;
+
+    if(cashReceiptPass){
+
+        limit44AD = 30000000;
+
+    }
+    else{
+
+        limit44AD = 20000000;
+
+    }
+
+
+    if(turnover > limit44AD){
+
+        eligible = false;
+
+        reasons.push(
+            "Turnover exceeds applicable 44AD limit of "
+            + money(limit44AD)
+            + "."
+        );
+
+    }
+
+
+    /* PRESUMPTIVE PROFIT */
+
+    let otherReceipts =
+        turnover - cashReceipts;
+
+    let profit6 =
+        otherReceipts * 0.06;
+
+    let profit8 =
+        cashReceipts * 0.08;
+
+    let presumptiveProfit =
+        profit6 + profit8;
+
+    let profitPass =
+        profitDeclared >= presumptiveProfit;
+
+
+    /* HISTORY */
+
+    let optout =
+        document.getElementById("optout44ad").value;
+
+
+    if(optout === "yes"){
+
+        reasons.push(
+            "Previous 44AD discontinuation / lower-income declaration issue selected. Section 44AD(4) consequences require review."
+        );
+
+    }
+
+
+    /* 44AD RESULT */
+
+    let adBox =
+        document.getElementById("adBox");
+
+    let adStatus =
+        document.getElementById("adStatus");
+
+    let adDetails =
+        document.getElementById("adDetails");
+
+
+    if(eligible){
+
+        adBox.className =
+            "result-box green";
+
+        adStatus.innerHTML =
+            "🟢 44AD ELIGIBILITY: YES";
+
+    }
+    else{
+
+        adBox.className =
+            "result-box red";
+
+        adStatus.innerHTML =
+            "🔴 44AD ELIGIBILITY: NO";
+
+    }
+
+
+    let adHTML = `
+
+        <div class="item">
+
+            <b>Business Nature</b><br>
+
+            ${
+                document
+                .getElementById("businessNature")
+                .options[
+                    document
+                    .getElementById("businessNature")
+                    .selectedIndex
+                ].text
+            }
+
+        </div>
+
+
+        <div class="item">
+
+            <b>Turnover / Gross Receipts</b><br>
+
+            ${money(turnover)}
+
+        </div>
+
+
+        <div class="item">
+
+            <b>Applicable 44AD Limit</b><br>
+
+            ${money(limit44AD)}
+
+        </div>
+
+
+        <div class="item">
+
+            <b>Presumptive Profit Calculation</b>
+
+            <div class="calculation">
+
+                Other Receipts:
+                ${money(otherReceipts)}
+                × 6%
+                =
+                ${money(profit6)}
+
+                <br><br>
+
+                Cash Receipts:
+                ${money(cashReceipts)}
+                × 8%
+                =
+                ${money(profit8)}
+
+                <br><br>
+
+                <b>
+                    Presumptive Profit:
+                    ${money(presumptiveProfit)}
+                </b>
+
+            </div>
+
+        </div>
+
+
+        <div class="item">
+
+            <b>Profit Declared</b><br>
+
+            ${money(profitDeclared)}
+
+        </div>
+
+
+        <div class="item">
+
+            <b>Profit Test</b>
+
+            <div class="calculation">
+
+                ${profitPass
+                    ? '<span class="success">PASS ✓ Profit is not below presumptive amount.</span>'
+                    : '<span class="danger">FAIL ✗ Profit is below presumptive amount.</span>'
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    reasons.forEach(function(reason){
+
+        adHTML += `
+
+            <div class="item">
+
+                • ${reason}
+
+            </div>
+
+        `;
+
+    });
+
+
+    if(reasons.length === 0){
+
+        adHTML += `
+
+            <div class="item">
+
+                <span class="success">
+
+                    All basic 44AD eligibility
+                    conditions entered in the tool
+                    are satisfied ✓
+
+                </span>
+
+            </div>
+
+        `;
+
+    }
+
+
+    adDetails.innerHTML =
+        adHTML;
+
+
+    /* AUDIT */
+
+    let audit = false;
+
+    let auditReasons = [];
+
+
+    if(turnover > 100000000){
+
+        audit = true;
+
+        auditReasons.push(
+            "Turnover exceeds ₹10 crore."
+        );
+
+    }
+
+    else if(turnover > 10000000){
+
+        if(
+            cashReceiptPass &&
+            cashPaymentPass
+        ){
+
+            auditReasons.push(
+                "Turnover is above ₹1 crore but both cash conditions are within 5%."
+            );
+
+        }
+        else{
+
+            audit = true;
+
+            auditReasons.push(
+                "Turnover exceeds ₹1 crore and enhanced ₹10 crore threshold conditions are not satisfied."
+            );
+
+        }
+
+    }
+
+
+    if(
+        eligible &&
+        !profitPass
+    ){
+
+        audit = true;
+
+        auditReasons.push(
+            "Profit declared is below the calculated 44AD presumptive amount. Section 44AD(5) / 44AB consequences require review."
+        );
+
+    }
+
+
+    if(optout === "yes"){
+
+        audit = true;
+
+        auditReasons.push(
+            "44AD discontinuation / lower-income history selected. Five-year consequences require review."
+        );
+
+    }
+
+
+    showAudit(
+        audit,
+        auditReasons
+    );
+
+
+    show44ADReview(
+        eligible,
+        profitPass
+    );
+
+
+    showReview();
+
+}
+
+
+/* =========================================
+   AUDIT RESULT
+========================================= */
+
+function showAudit(
+    audit,
+    reasons
+){
+
+    let auditBox =
+        document.getElementById("auditBox");
+
+    let auditStatus =
+        document.getElementById("auditStatus");
+
+    let auditDetails =
+        document.getElementById("auditDetails");
+
+
+    let tp =
+        document.getElementById("tp").value;
+
+    let otherAudit =
+        document.getElementById("otherAudit").value;
+
+
+    if(audit){
+
+        auditBox.className =
+            "result-box green";
+
+        auditStatus.innerHTML =
+            "🟢 TAX AUDIT APPLICABLE";
+
+    }
+    else{
+
+        auditBox.className =
+            "result-box red";
+
+        auditStatus.innerHTML =
+            "🔴 TAX AUDIT NOT APPLICABLE";
+
+    }
+
+
+    if(reasons.length === 0){
+
+        reasons.push(
+            "No Section 44AB audit trigger identified from the information entered."
+        );
+
+    }
+
+
+    let html = "";
+
+
+    reasons.forEach(function(reason){
+
+        html += `
+
+            <div class="item">
+
+                • ${reason}
+
+            </div>
+
+        `;
+
+    });
+
+
+    if(audit){
+
+        let form =
+            otherAudit === "yes"
+            ? "Form 3CA + 3CD"
+            : "Form 3CB + 3CD";
+
+
+        let auditDate =
+            tp === "yes"
+            ? "31 October 2026"
+            : "30 September 2026";
+
+
+        let itrDate =
+            tp === "yes"
+            ? "30 November 2026"
+            : "31 October 2026";
+
+
+        html += `
+
+            <div class="item">
+
+                <b>Audit Form</b><br>
+
+                ${form}
+
+            </div>
+
+
+            <div class="item">
+
+                <b>Tax Audit Report Due Date</b><br>
+
+                ${auditDate}
+
+            </div>
+
+
+            <div class="item">
+
+                <b>ITR Due Date</b><br>
+
+                ${itrDate}
+
+            </div>
+
+        `;
+
+    }
+
+
+    auditDetails.innerHTML =
+        html;
+
+}
+
+
+/* =========================================
+   FINAL 44AD CONCLUSION
+========================================= */
+
+function show44ADReview(
+    eligible,
+    profitPass
+){
+
+    let box =
+        document.getElementById("adaBox");
+
+    let status =
+        document.getElementById("adaStatus");
+
+    let details =
+        document.getElementById("adaDetails");
+
+
+    box.className =
+        "result-box blue";
+
+
+    status.innerHTML =
+        "📌 FINAL 44AD CONCLUSION";
+
+
+    let html = "";
+
+
+    if(eligible && profitPass){
+
+        html = `
+
+            <div class="item">
+
+                <div class="big-result">
+
+                    🟢 44AD CAN BE ADOPTED
+
+                </div>
+
+                <br>
+
+                Business is eligible and declared
+                profit is not below the calculated
+                presumptive amount.
+
+            </div>
+
+        `;
+
+    }
+
+    else if(eligible && !profitPass){
+
+        html = `
+
+            <div class="item">
+
+                <div class="big-result">
+
+                    🟠 44AD BUSINESS IS ELIGIBLE,
+                    BUT PROFIT TEST FAILS
+
+                </div>
+
+                <br>
+
+                Business is otherwise eligible for
+                44AD, but declared profit is below
+                the calculated presumptive amount.
+
+            </div>
+
+
+            <div class="warning">
+
+                Review Section 44AD(5) and corresponding
+                Section 44AB consequences before final
+                conclusion.
+
+            </div>
+
+        `;
+
+    }
+
+    else{
+
+        html = `
+
+            <div class="item">
+
+                <div class="big-result">
+
+                    🔴 44AD NOT AVAILABLE
+
+                </div>
+
+                <br>
+
+                One or more basic eligibility
+                conditions are not satisfied.
+
+            </div>
+
+        `;
+
+    }
+
+
+    details.innerHTML =
+        html;
+
+}
+
+
+/* =========================================
+   PROFESSION
+========================================= */
+
+function calculateProfession(){
+
+    let category =
+        document.getElementById("category").value;
+
+    let resident =
+        document.getElementById("resident").value;
+
+    let receipts =
+        Number(
+            document.getElementById("professionalReceipts").value
+        ) || 0;
+
+    let cashReceipts =
+        Number(
+            document.getElementById("professionalCashReceipts").value
+        ) || 0;
+
+    let profit =
+        Number(
+            document.getElementById("professionalProfit").value
+        ) || 0;
+
+
+    if(receipts <= 0){
+
+        alert(
+            "Please enter Gross Professional Receipts."
+        );
+
+        return;
+
+    }
+
+
+    if(cashReceipts > receipts){
+
+        alert(
+            "Cash Receipts cannot exceed Professional Receipts."
+        );
+
+        return;
+
+    }
+
+
+    let cashPct =
+        pct(
+            cashReceipts,
+            receipts
+        );
+
+
+    let cashPass =
+        cashPct <= 5;
+
+
+    document
+        .getElementById("cashDetails")
+        .innerHTML = `
+
+            <div class="item">
+
+                <b>Professional Cash Receipt Test</b>
+
+                <div class="calculation">
+
+                    ${money(cashReceipts)}
+                    ÷
+                    ${money(receipts)}
+                    × 100
+                    =
+                    <b>
+                        ${cashPct.toFixed(2)}%
+                    </b>
+
+                    &nbsp;
+
+                    ${pass(cashPass)}
+
+                </div>
+
+            </div>
+
+        `;
+
+
+    /* 44ADA */
+
+    let professionNature =
+        document.getElementById("professionNature").value;
+
+    let opt =
+        document.getElementById("opt44ada").value;
+
+
+    let specified =
+        professionNature !== "" &&
+        professionNature !== "other";
+
+
+    let limit =
+        cashPass
+        ? 7500000
+        : 5000000;
+
+
+    let presumptiveProfit =
+        receipts * 0.50;
+
+
+    let profitPass =
+        profit >= presumptiveProfit;
+
+
+    let adaEligible =
+        resident === "resident" &&
+        (
+            category === "individual" ||
+            category === "firm"
+        ) &&
+        specified &&
+        opt === "yes" &&
+        receipts <= limit;
+
+
+    let adaReasons = [];
+
+
+    if(!specified){
+
+        adaReasons.push(
+            "Selected profession is not marked as specified profession."
+        );
+
+    }
+
+
+    if(receipts > limit){
+
+        adaReasons.push(
+            "Professional receipts exceed applicable 44ADA limit."
+        );
+
+    }
+
+
+    if(!profitPass){
+
+        adaReasons.push(
+            "Declared professional income is below 50% presumptive income."
+        );
+
+    }
+
+
+    let adaBox =
+        document.getElementById("adaBox");
+
+    let adaStatus =
+        document.getElementById("adaStatus");
+
+    let adaDetails =
+        document.getElementById("adaDetails");
+
+
+    if(adaEligible && profitPass){
+
+        adaBox.className =
+            "result-box green";
+
+        adaStatus.innerHTML =
+            "🟢 44ADA AVAILABLE";
+
+    }
+
+    else if(
+        adaEligible &&
+        !profitPass
+    ){
+
+        adaBox.className =
+            "result-box orange";
+
+        adaStatus.innerHTML =
+            "🟠 44ADA ELIGIBLE, BUT PROFIT TEST FAILS";
+
+    }
+
+    else{
+
+        adaBox.className =
+            "result-box red";
+
+        adaStatus.innerHTML =
+            "🔴 44ADA NOT AVAILABLE";
+
+    }
+
+
+    let html = `
+
+        <div class="item">
+
+            <b>Gross Professional Receipts</b><br>
+
+            ${money(receipts)}
+
+        </div>
+
+
+        <div class="item">
+
+            <b>Applicable 44ADA Limit</b><br>
+
+            ${money(limit)}
+
+        </div>
+
+
+        <div class="item">
+
+            <b>Presumptive Income @ 50%</b><br>
+
+            ${money(presumptiveProfit)}
+
+        </div>
+
+
+        <div class="item">
+
+            <b>Profit / Income Declared</b><br>
+
+            ${money(profit)}
+
+        </div>
+
+
+        <div class="item">
+
+            <b>Profit Test</b>
+
+            <div class="calculation">
+
+                ${pass(profitPass)}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    adaReasons.forEach(function(reason){
+
+        html += `
+
+            <div class="item">
+
+                • ${reason}
+
+            </div>
+
+        `;
+
+    });
+
+
+    adaDetails.innerHTML =
+        html;
+
+
+    /* AUDIT */
+
+    let audit = false;
+
+    let reasons = [];
+
+
+    if(receipts > 5000000){
+
+        audit = true;
+
+        reasons.push(
+            "Professional receipts exceed ₹50 lakh."
+        );
+
+    }
+
+
+    if(
+        adaEligible &&
+        !profitPass
+    ){
+
+        audit = true;
+
+        reasons.push(
+            "Income declared is below 44ADA presumptive amount."
+        );
+
+    }
+
+
+    showAudit(
+        audit,
+        reasons
+    );
+
+
+    showReview();
+
+}
+
+
+/* =========================================
+   CA REVIEW
+========================================= */
+
+function showReview(){
+
+    document
+        .getElementById("reviewPoints")
+        .innerHTML = `
+
+            <div class="item">
+                ✓ Verify actual nature of business / profession.
+            </div>
+
+            <div class="item">
+                ✓ Verify turnover / gross receipts with books,
+                GST and bank data.
+            </div>
+
+            <div class="item">
+                ✓ Verify actual cash receipts.
+            </div>
+
+            <div class="item">
+                ✓ Verify cash payments.
+            </div>
+
+            <div class="item">
+                ✓ Verify excluded activities such as agency,
+                commission and brokerage.
+            </div>
+
+            <div class="item">
+                ✓ Verify previous 44AD history.
+            </div>
+
+            <div class="item">
+                ✓ Verify applicable presumptive income percentage.
+            </div>
+
+            <div class="warning">
+
+                ⚠️ This is a CA decision-support tool.
+                Final conclusion should be verified with complete
+                facts, books, previous-year history and applicable law.
+
+            </div>
+
+        `;
+
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+function resetAll(){
+
+    document
+        .querySelectorAll("input")
+        .forEach(function(el){
+
+            el.value = "";
+
+        });
+
+
+    document
+        .querySelectorAll("select")
+        .forEach(function(el){
+
+            el.selectedIndex = 0;
+
+        });
+
+
+    document
+        .getElementById("businessSection")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("professionSection")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("result")
+        .style.display = "none";
+
+}
+
+</script>
+
+</body>
+</html>
